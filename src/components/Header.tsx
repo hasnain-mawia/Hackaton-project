@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { Logout } from '../config/firebase'
+import { db, doc, Logout } from '../config/firebase'
 import { Link, useNavigate } from 'react-router-dom'
 import {auth, onAuthStateChanged } from "../config/firebase";
 import { LuLogOut } from 'react-icons/lu';
-import { FaMoon, FaSun } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
+import { getAuth } from 'firebase/auth';
 
 
 
 function Header() {
   const storageKey:any = localStorage.getItem('DarkMode')
-  const  [isBrigth, setIsBrigth] = useState<any>(JSON.parse(storageKey));
-  {isBrigth ? document.body.classList.add('dark') : document.body.classList.remove('dark')}
-  const darkMode = () =>{
-    setIsBrigth(!isBrigth)
-    localStorage.setItem('DarkMode',`${!isBrigth}`);
-  }
     const navigate = useNavigate()
     const [user, setUser] = useState<any>();
     const logoutUser = () =>{
     Logout(navigate)
   }
+    
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) => {  
         setUser(user);
-          });
-     }) 
-
-     useEffect(()=>{
+      });
+    }) 
+    
+    useEffect(()=>{
       const {pathname} = window.location;
       if (user) {
         if(pathname === '/'){
@@ -42,7 +37,7 @@ function Header() {
      },[window.location, user])
 
       return user ? (
-    <div className='p-2'>
+    <div className='p-2 sticky top-0 bg-white shadow-sm'>
         <div className=' grid grid-cols-[50%_Auto] items-center justify-between w-[95%] mx-auto'>
         <div className='grid grid-cols-[33%_Auto]'>
           <h2 className='text-[22px] font-bold text-[#747474]'> <Link to={'/dashboard'}>Scrolllink </Link></h2>

@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBaJVwFxA-Kh0FKpP66uP_VLBqJT2aeU7o",
-  authDomain: "hackathon-project-75005.firebaseapp.com",
-  projectId: "hackathon-project-75005",
-  storageBucket: "hackathon-project-75005.firebasestorage.app",
-  messagingSenderId: "809659069225",
-  appId: "1:809659069225:web:52eccaa57421b1f4e8bd38",
-  measurementId: "G-XHRCQYQ97W"
+  apiKey: "AIzaSyA1ilJ5fHPBTuyGNy59ri153-lT9og3J7Q",
+  authDomain: "firstapp-d0bc0.firebaseapp.com",
+  databaseURL: "https://firstapp-d0bc0-default-rtdb.firebaseio.com",
+  projectId: "firstapp-d0bc0",
+  storageBucket: "firstapp-d0bc0.appspot.com",
+  messagingSenderId: "117101917841",
+  appId: "1:117101917841:web:d9cc91e457a56469af7130",
+  measurementId: "G-2WNWJSJX1H"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -71,16 +72,16 @@ const Logout = (navigate:any) =>{
     toast.success(`${err}, Logout issue`);
   }
 }
-const ProductUpload = async(obj:any) =>{
-  const {title, price, category, description, image, quantity} = obj;
-  const storageRef = ref(storage, 'products/'+ image.name);
+const PostUpload = async(obj:any) =>{
+  const {title,image} = obj;
+  const storageRef = ref(storage, 'posts/'+ image.name);
   await uploadBytes(storageRef,image)
   const URL = await getDownloadURL(storageRef);
-  return addDoc(collection(db,"products"),{title, quantity, price, category, description, image: URL});
+  return addDoc(collection(db,"Post"),{title,image: URL});
 }
 
 const Getdata = async() =>{
-  const docRef = collection(db,"products")
+  const docRef = collection(db,"Post")
   const docData = await getDocs(docRef);
   const data = docData.docs.map(doc=>({
     id:doc.id, ...doc.data()
@@ -95,7 +96,7 @@ export {
   Logout,
   onAuthStateChanged,
   auth,
-  ProductUpload,
+  PostUpload,
   Getdata,
   doc,
   db,

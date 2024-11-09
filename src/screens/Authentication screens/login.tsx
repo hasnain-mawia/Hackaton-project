@@ -6,7 +6,7 @@ import { FaFacebook} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import 'react-toastify/dist/ReactToastify.css';
 
-function Login() {
+function UploadPost() {
     const navigate = useNavigate()
     const [errors , setErrors] = useState<any>({});
     const [showpassword, setshowpassword] = useState(false);
@@ -95,4 +95,4 @@ function Login() {
   )
 }
 
-export default Login
+export default UploadPost

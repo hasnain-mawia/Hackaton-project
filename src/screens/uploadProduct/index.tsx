@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify';
-import { ProductUpload } from '../../config/firebase';
+import { PostUpload } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -38,7 +38,7 @@ function Upload() {
        
          setErrors(validationErrors)
         if(Object.keys(validationErrors).length === 0){
-            ProductUpload(values)
+            // ProductUpload(values)
             try{
                 toast.success(`${values.title} Uploaded Successfully`, {
                         position: "top-right",

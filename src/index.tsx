@@ -9,12 +9,10 @@ import {
 } from "react-router-dom";
 import Errorpage from './screens/404 page';
 import Dasboard from './screens/dashboard';
-import Detail from './screens/detail';
 import Register from './screens/Authentication screens/register';
 import Login from './screens/Authentication screens/login';
 import CheckAuth from './config/checkAuth';
 import Upload from './screens/uploadProduct';
-import Checkout from './screens/checkout';
 import { Provider } from 'react-redux';
 import {store, persistor} from './store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -30,10 +28,6 @@ const router = createBrowserRouter([
       element: <Dasboard/>,
     },
     {
-      path: "/detail/:id",
-      element: <Detail/>,
-    },
-    {
       path: "/",
       element: <Login/>,
     },
@@ -44,10 +38,6 @@ const router = createBrowserRouter([
     {
       path: "/upload",loader:CheckAuth,
       element: <Upload/>,
-    },
-    {
-      path: "/checkout" ,loader:CheckAuth,
-      element: <Checkout/>,
     },
   ]
   },
